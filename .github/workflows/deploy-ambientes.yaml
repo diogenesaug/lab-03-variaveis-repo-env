@@ -1,0 +1,87 @@
+name: Deploy Multi-Ambientes
+
+on:
+  workflow_dispatch:
+    
+jobs:
+  mostrar-variaveis-repositorio:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Exibir Variáveis de Repositório
+        run: |
+          echo "=== VARIÁVEIS DE REPOSITÓRIO ==="
+          echo "Aplicação: ${{ vars.APP_NAME }}"
+          echo "Região: ${{ vars.DEFAULT_REGION }}"
+          echo "Timeout padrão: ${{ vars.DEFAULT_TIMEOUT }}"
+          echo "Versão do Node: ${{ vars.NODE_VERSION }}"
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Configurar ambiente DEV
+        run: |
+          echo "=== DEPLOY EM DESENVOLVIMENTO ==="
+          echo "Aplicação: ${{ vars.APP_NAME }}"
+          echo "Ambiente: ${{ vars.ENVIRONMENT }}"
+          echo "API URL: ${{ vars.API_URL }}"
+          echo "Database: ${{ vars.DATABASE_NAME }}"
+          echo "Região: ${{ vars.DEFAULT_REGION }}"
+          echo "Debug Mode: ${{ vars.DEBUG_MODE }}"
+          echo "Max Connections: ${{ vars.MAX_CONNECTIONS }}"
+      
+      - name: Simular build para DEV
+        run: |
+          echo "Compilando aplicação para ${{ vars.ENVIRONMENT }}..."
+          echo "URL de destino: ${{ vars.API_URL }}"
+          sleep 2
+          echo "Build concluído para DEV"
+
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - name: Configurar ambiente STAGING
+        run: |
+          echo "=== DEPLOY EM STAGING ==="
+          echo "Aplicação: ${{ vars.APP_NAME }}"
+          echo "Ambiente: ${{ vars.ENVIRONMENT }}"
+          echo "API URL: ${{ vars.API_URL }}"
+          echo "Database: ${{ vars.DATABASE_NAME }}"
+          echo "Região: ${{ vars.DEFAULT_REGION }}"
+          echo "Debug Mode: ${{ vars.DEBUG_MODE }}"
+          echo "Max Connections: ${{ vars.MAX_CONNECTIONS }}"
+      
+      - name: Simular testes de integração
+        run: |
+          echo "Executando testes em ${{ vars.ENVIRONMENT }}..."
+          echo "Endpoint: ${{ vars.API_URL }}/health"
+          sleep 3
+          echo "Testes concluídos para STAGING"
+    
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Configurar ambiente PRODUCTION
+        run: |
+          echo "=== DEPLOY EM PRODUCTION ==="
+          echo "Aplicação: ${{ vars.APP_NAME }}"
+          echo "Ambiente: ${{ vars.ENVIRONMENT }}"
+          echo "API URL: ${{ vars.API_URL }}"
+          echo "Database: ${{ vars.DATABASE_NAME }}"
+          echo "Região: ${{ vars.DEFAULT_REGION }}"
+          echo "Debug Mode: ${{ vars.DEBUG_MODE }}"
+          echo "Max Connections: ${{ vars.MAX_CONNECTIONS }}"
+      
+      - name: Deploy em Produção
+        run: |
+          echo "Realizado deploy em ${{ vars.ENVIRONMENT }}..."
+          echo "URL pública: ${{ vars.API_URL }}"
+          sleep 4
+          echo "Deploy concluído para PRODUCTION"
+
+      - name: Notificar equipe
+        run: |
+          echo "Enviando notificação de deploy para ${{ vars.API_URL }}..."
+          echo "Versão implementada: "${{ vars.APP_NAME }} em ${{ vars.ENVIRONMENT }}"
