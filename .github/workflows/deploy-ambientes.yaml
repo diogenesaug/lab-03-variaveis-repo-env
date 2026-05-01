@@ -84,4 +84,4 @@ jobs:
       - name: Notificar equipe
         run: |
           echo "Enviando notificação de deploy para ${{ vars.API_URL }}..."
-          echo "Versão implementada: "${{ vars.APP_NAME }} em ${{ vars.ENVIRONMENT }}"
+          echo "Versão implementada: ${{ vars.APP_NAME }} em ${{ vars.ENVIRONMENT }}"
