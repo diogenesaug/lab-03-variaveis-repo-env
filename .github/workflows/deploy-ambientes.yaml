@@ -81,7 +81,7 @@ jobs:
           echo "Realizado deploy em ${{ vars.ENVIRONMENT }}..."
           echo "URL pública: ${{ vars.API_URL }}"
           sleep 4
-          echo "Deploy concluído para PRODUCTION"
+          echo "Deploy concluído para PRODUCTION!"
 
           
       - name: Notificar equipe
