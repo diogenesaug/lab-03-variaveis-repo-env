@@ -174,18 +174,13 @@ jobs:
           needs.outputs-entre-steps.result == 'failure' ||
           needs.expressoes-e-funcoes.result == 'failure'
         run: |
-          echo "Pelo menos um job FALHOU!"
-          echo "Verifique os logs acima para mais detalhes."
+          echo "Realizado deploy em ${{ vars.ENVIRONMENT }}..."
+          echo "URL pública: ${{ vars.API_URL }}"
+          sleep 4
+          echo "Deploy concluído para PRODUCTION"
 
-  # Job 5: Caso de uso prático - Nomear artefatos dinamicamente
-  criar-artefato-dinamico:
-    runs-on: ubuntu-latest
-    needs: outputs-entre-steps
-    steps:
-      - name: Checkout código
-        uses: actions/checkout@v6
-
-      - name: Criar arquivo de build simulado
+          
+      - name: Notificar equipe
         run: |
           mkdir -p build
           echo "Build info" > build/info.txt
